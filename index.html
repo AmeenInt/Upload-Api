@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💎AMEENINT API MAKER🦋</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        #fileUpload {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>File Upload and API Keys</h1>
+
+    <div class="container">
+        <button onclick="showFileUpload()">API Upload</button>
+        <button onclick="showApiKeys()">API Keys</button>
+    </div>
+
+    <div id="fileUploadSection" style="display: none;" class="container">
+        <h2>AmeenInt API</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="fileUpload" name="fileUpload" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <div id="apiKeysSection" style="display: none;" class="container">
+        <h2>📩 AMEENINT BANK</h2>
+        <table id="fileList">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Api Key</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- File list will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function showFileUpload() {
+            document.getElementById('fileUploadSection').style.display = 'block';
+            document.getElementById('apiKeysSection').style.display = 'none';
+        }
+
+        function showApiKeys() {
+            document.getElementById('fileUploadSection').style.display = 'none';
+            document.getElementById('apiKeysSection').style.display = 'block';
+            // Fetch and display uploaded files
+            fetchUploadedFiles();
+        }
+
+        function fetchUploadedFiles() {
+            // Simulated list of uploaded files (replace with actual backend logic)
+            const uploadedFiles = [
+                { name: 'File 1', viewUrl: '/view/file1.pdf' },
+                { name: 'File 2', viewUrl: '/view/file2.jpg' },
+                { name: 'File 3', viewUrl: '/view/file3.txt' }
+            ];
+
+            const fileList = document.getElementById('fileList');
+            const tbody = fileList.querySelector('tbody');
+            tbody.innerHTML = '';
+
+            uploadedFiles.forEach(file => {
+                const row = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                const linkCell = document.createElement('td');
+                const viewLink = document.createElement('a');
+
+                viewLink.textContent = file.name;
+                viewLink.href = file.viewUrl;
+                viewLink.setAttribute('target', '_blank');
+
+                nameCell.appendChild(document.createTextNode(file.name));
+                linkCell.appendChild(viewLink);
+
+                row.appendChild(nameCell);
+                row.appendChild(linkCell);
+
+                tbody.appendChild(row);
+            });
+        }
+
+        // Simulated file upload handling (replace with actual backend logic)
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            // Simulate file upload and update UI
+            const uploadedFile = {
+                name: formData.get('fileUpload').name,
+                viewUrl: '/view/' + formData.get('fileUpload').name.replace(/ /g, '_')
+            };
+
+            const fileList = document.getElementById('fileList');
+            const tbody = fileList.querySelector('tbody');
+            const row = document.createElement('tr');
+            const nameCell = document.createElement('td');
+            const linkCell = document.createElement('td');
+            const viewLink = document.createElement('a');
+
+            viewLink.textContent = uploadedFile.name;
+            viewLink.href = uploadedFile.viewUrl;
+            viewLink.setAttribute('target', '_blank');
+
+            nameCell.appendChild(document.createTextNode(uploadedFile.name));
+            linkCell.appendChild(viewLink);
+
+            row.appendChild(nameCell);
+            row.appendChild(linkCell);
+
+            tbody.appendChild(row);
+
+            // Clear file upload input
+            document.getElementById('fileUpload').value = '';
+
+            // Optionally, you can save the file on the server using AJAX/fetch here
+
+            // Display the uploaded files section
+            showApiKeys();
+        });
+    </script>
+</body>
+</html>
