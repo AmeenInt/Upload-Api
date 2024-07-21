@@ -14,9 +14,7 @@
         .container {
             margin-top: 20px;
         }
-        #fileUpload {
-            display: none;
-        }
+       
         table {
             width: 100%;
             border-collapse: collapse;
@@ -63,21 +61,20 @@
 
     <script>
         function showFileUpload() {
-            document.getElementById('fileUploadSection').style.display = 'block';
-            document.getElementById('apiKeysSection').style.display = 'none';
-        }
+    document.getElementById('fileUploadSection').style.display = 'block';
+    document.getElementById('apiKeysSection').style.display = 'none';
+}
 
-        function showApiKeys() {
-            document.getElementById('fileUploadSection').style.display = 'none';
-            document.getElementById('apiKeysSection').style.display = 'block';
-            // Fetch and display uploaded files
-            fetchUploadedFiles();
-        }
+function showApiKeys() {
+    document.getElementById('fileUploadSection').style.display = 'none';
+    document.getElementById('apiKeysSection').style.display = 'block';
+    fetchUploadedFiles(); // Optionally fetch uploaded files when showing API Keys
+}
 
         function fetchUploadedFiles() {
             // Simulated list of uploaded files (replace with actual backend logic)
             const uploadedFiles = [
-                { name: 'File 1', viewUrl: '/view/file1.pdf' },
+                { name: 'AmeenInt', viewUrl: 'api-ameenint.vercel.com/AmeenInt.png' },
                 { name: 'File 2', viewUrl: '/view/file2.jpg' },
                 { name: 'File 3', viewUrl: '/view/file3.txt' }
             ];
